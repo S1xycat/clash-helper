@@ -1,4 +1,4 @@
-# Clash Float Status v0.1.0
+# clash-helper v0.1.0
 
 首个可用版本。
 
@@ -14,6 +14,6 @@
 
 ## 使用
 
-下载并运行 `ClashFloatStatus.exe`。
+下载并运行 `ClashHelper.exe`。
 
 如果地区识别不准确，请确认 Clash 的节点选择策略组名称是否在 README 的兼容列表中。

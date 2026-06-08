@@ -1,4 +1,4 @@
-# Clash Float Status
+# clash-helper
 
 一个贴合 Windows 11 任务栏的 Clash 状态条，显示系统代理开关、当前节点地区和延迟。
 
@@ -15,7 +15,7 @@
 
 ## 下载使用
 
-从 Release 下载 `ClashFloatStatus.exe`，双击运行即可。
+从 Release 下载 `ClashHelper.exe`，双击运行即可。
 
 推荐先启动 Clash for Windows / Clash Verge / Mihomo Party 等 Clash 客户端，再启动本工具。
 
@@ -56,7 +56,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 生成文件：
 
 ```text
-bin\ClashFloatStatus.exe
+bin\ClashHelper.exe
 ```
 
 ## 数据位置
@@ -64,16 +64,15 @@ bin\ClashFloatStatus.exe
 本工具的窗口位置和锁定状态保存在：
 
 ```text
-%APPDATA%\ClashFloatStatus\settings.ini
+%APPDATA%\clash-helper\settings.ini
 ```
 
 开机启动写入：
 
 ```text
-HKCU\Software\Microsoft\Windows\CurrentVersion\Run\ClashFloatStatus
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run\clash-helper
 ```
 
 ## 注意
 
 Windows 11 没有官方接口允许第三方控件真正嵌入任务栏右侧区域。本工具采用透明分层窗口贴合任务栏，尽量模拟原生任务栏体验，同时避免注入 `explorer.exe` 带来的稳定性和安全风险。
-

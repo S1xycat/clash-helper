@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $src = Join-Path $root "src\Program.cs"
 $outDir = Join-Path $root "bin"
-$out = Join-Path $outDir "ClashFloatStatus.exe"
+$out = Join-Path $outDir "ClashHelper.exe"
 $csc = Join-Path $env:WINDIR "Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 
 if (!(Test-Path -LiteralPath $csc)) {

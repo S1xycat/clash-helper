@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
-namespace ClashFloatStatus
+namespace ClashHelper
 {
     internal static class Program
     {
@@ -59,7 +59,7 @@ namespace ClashFloatStatus
             proxyEnabled = ProxyControl.IsEnabled();
 
             FormBorderStyle = FormBorderStyle.None;
-            Text = "ClashFloatStatus";
+            Text = "clash-helper";
             ShowInTaskbar = false;
             TopMost = true;
             DoubleBuffered = true;
@@ -815,7 +815,7 @@ namespace ClashFloatStatus
     internal static class StartupControl
     {
         private const string RunKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        private const string ValueName = "ClashFloatStatus";
+        private const string ValueName = "clash-helper";
 
         public static bool IsEnabled()
         {
@@ -845,7 +845,7 @@ namespace ClashFloatStatus
 
     internal sealed class AppSettings
     {
-        private static readonly string Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ClashFloatStatus");
+        private static readonly string Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "clash-helper");
         private static readonly string FilePath = Path.Combine(Dir, "settings.ini");
 
         public bool Locked = true;
