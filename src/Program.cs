@@ -988,6 +988,9 @@ namespace ClashHelper
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
+
         [DllImport("user32.dll")]
         private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
@@ -1040,9 +1043,13 @@ namespace ClashHelper
             IntPtr hwnd = GetForegroundWindow();
             if (hwnd == IntPtr.Zero || hwnd == ownHandle || !IsWindowVisible(hwnd)) return false;
 
+            string className = GetWindowClassName(hwnd);
+            if (IsShellWindowClass(className)) return false;
+
             uint processId;
             GetWindowThreadProcessId(hwnd, out processId);
             if (processId == (uint)Process.GetCurrentProcess().Id) return false;
+            if (IsExplorerProcess(processId)) return false;
 
             RECT rect;
             if (!GetWindowRect(hwnd, out rect)) return false;
@@ -1063,6 +1070,39 @@ namespace ClashHelper
             bool coversWidth = rect.left <= info.rcMonitor.left + tolerance && rect.right >= info.rcMonitor.right - tolerance && windowWidth >= monitorWidth - tolerance;
             bool coversHeight = rect.top <= info.rcMonitor.top + tolerance && rect.bottom >= info.rcMonitor.bottom - tolerance && windowHeight >= monitorHeight - tolerance;
             return coversWidth && coversHeight;
+        }
+
+        private static string GetWindowClassName(IntPtr hwnd)
+        {
+            System.Text.StringBuilder builder = new System.Text.StringBuilder(256);
+            int length = GetClassName(hwnd, builder, builder.Capacity);
+            return length > 0 ? builder.ToString() : "";
+        }
+
+        private static bool IsShellWindowClass(string className)
+        {
+            if (string.IsNullOrWhiteSpace(className)) return false;
+            return className == "Progman"
+                || className == "WorkerW"
+                || className == "Shell_TrayWnd"
+                || className == "Shell_SecondaryTrayWnd"
+                || className == "SHELLDLL_DefView"
+                || className == "SysListView32";
+        }
+
+        private static bool IsExplorerProcess(uint processId)
+        {
+            try
+            {
+                using (Process process = Process.GetProcessById((int)processId))
+                {
+                    return string.Equals(process.ProcessName, "explorer", StringComparison.OrdinalIgnoreCase);
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public static void ApplyLayeredBitmap(IntPtr handle, Bitmap bitmap, Point location)

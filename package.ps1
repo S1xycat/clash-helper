@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$version = "0.1.0"
+$version = "0.1.1"
 $releaseDir = Join-Path $root "release"
 $packageDir = Join-Path $releaseDir "clash-helper-v$version"
 $zipPath = Join-Path $releaseDir "clash-helper-v$version.zip"

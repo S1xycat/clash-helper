@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Fix desktop clicks being incorrectly detected as fullscreen windows.
+- Exclude Explorer desktop/taskbar shell windows from fullscreen auto-hide.
+
 ## 0.1.0
 
 - Add a Windows taskbar-adjacent floating status widget.
@@ -9,4 +14,3 @@
 - Support dragging with lock/unlock, startup toggle, immediate refresh, and exit.
 - Hide automatically when a true fullscreen foreground window is active.
 - Use a per-pixel alpha layered window to avoid colored edges on transparent UI.
-
